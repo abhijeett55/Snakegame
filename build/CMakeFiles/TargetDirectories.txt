@@ -1,0 +1,3 @@
+C:/Users/abhii/Snakegame/build/CMakeFiles/Snakegame.dir
+C:/Users/abhii/Snakegame/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/abhii/Snakegame/build/CMakeFiles/ZERO_CHECK.dir
