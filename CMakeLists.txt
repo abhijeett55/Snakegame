@@ -23,11 +23,23 @@ add_executable(Snakegame
     src/snake.cpp
 )
 
-# MSVC exception handling fix
-if (MSVC)
-    target_compile_options(Snakegame PRIVATE /EHsc /wd4514 /wd4820)
+# Find SDL_gfx (header + library)
+find_path(SDL_GFX_INCLUDE_DIR SDL_gfxPrimitives.h)
+find_package(SDL3 REQUIRED CONFIG)
+target_link_libraries(Snakegame PRIVATE SDL3::SDL3 SDL3_gfx)
+
+find_library(SDL_GFX_LIBRARY NAMES SDL_gfx)
+
+if (SDL_GFX_INCLUDE_DIR AND SDL_GFX_LIBRARY)
+    target_include_directories(Snakegame PRIVATE ${SDL_GFX_INCLUDE_DIR})
+    target_link_libraries(Snakegame PRIVATE ${SDL_GFX_LIBRARY})
 endif()
 
 # Link SDL3
 string(STRIP "${SDL3_LIBRARIES}" SDL3_LIBRARIES)
-target_link_libraries(Snakegame ${SDL3_LIBRARIES})
+target_link_libraries(Snakegame PRIVATE ${SDL3_LIBRARIES})
+
+# MSVC exception handling fix
+if (MSVC)
+    target_compile_options(Snakegame PRIVATE /EHsc /wd4514 /wd4820)
+endif()

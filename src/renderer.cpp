@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 
+
+
 Renderer::Renderer(const std::size_t screen_width, const std::size_t screen_height,
                    const std::size_t grid_width, const std::size_t grid_height)
     : screen_width(screen_width),
@@ -56,12 +58,18 @@ void Renderer::Render(Snake const &snake, SDL_Point const &food) {
     for (SDL_Point const &point : snake.body) {
         block.x = static_cast<float>(point.x) * block.w;
         block.y = static_cast<float>(point.y) * block.h;
+        SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x80, 0xFF, 0xFF);
         SDL_RenderFillRect(sdl_renderer, &block);
     }
 
     // Draw snake head (blue if alive, red if dead)
-    block.x = snake.head_x * block.w;
-    block.y = snake.head_y * block.h;
+    SDL_FRect head_block;
+    head_block.w = block.w + 6;
+    head_block.h = block.h + 2;
+    head_block.x = snake.head_x * block.w - 3;
+    head_block.y = snake.head_y * block.h - 1;
+    // block.x = snake.head_x * block.w;
+    // block.y = snake.head_y * block.h;
     if (snake.alive) {
         SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
     } else {
