@@ -11,6 +11,8 @@ public:
       const std::size_t grid_width, const std::size_t grid_height);
 
     ~Renderer();
+    Renderer(const Renderer&) = delete;
+    Renderer& operator=(const Renderer&) = delete;
 
     void Render(Snake const &snake, SDL_Point const &food);
 

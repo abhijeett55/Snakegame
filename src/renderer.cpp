@@ -56,13 +56,15 @@ void Renderer::Render(Snake const &snake, SDL_Point const &food) {
     for (SDL_Point const &point : snake.body) {
         block.x = static_cast<float>(point.x) * block.w;
         block.y = static_cast<float>(point.y) * block.h;
-        SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x80, 0xFF, 0xFF);
         SDL_RenderFillRect(sdl_renderer, &block);
     }
 
-    // Draw snake head (blue if alive, red if dead)
+    // Draw snake head (bigger, blue if alive, red if dead)
     block.x = snake.head_x * block.w;
     block.y = snake.head_y * block.h;
+    block.w *= 1.2f;  // make head 20% bigger
+    block.h *= 1.2f;
+
     if (snake.alive) {
         SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
     } else {
