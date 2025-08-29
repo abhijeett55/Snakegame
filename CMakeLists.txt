@@ -23,10 +23,7 @@ add_executable(Snakegame
     src/snake.cpp
 )
 
-# Find SDL_gfx (header + library)
-find_path(SDL_GFX_INCLUDE_DIR SDL_gfxPrimitives.h)
-find_package(SDL3 REQUIRED CONFIG)
-target_link_libraries(Snakegame PRIVATE SDL3::SDL3 SDL3_gfx)
+
 
 find_library(SDL_GFX_LIBRARY NAMES SDL_gfx)
 
